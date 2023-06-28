@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilities.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">E-Source</a> &gt; <a href="index.source.html" class="el_package">com.esource.assignment</a> &gt; <span class="el_source">Utilities.java</span></div><h1>Utilities.java</h1><pre class="source lang-java linenums">package com.esource.assignment;
+
+import com.esource.assignment.exception.InvalidArraySpecException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+<span class="nc" id="L12">public class Utilities {</span>
+
+    /**
+     * Returns a map whose key is the element of the array and the value - the cumulative number of occurrences
+     * @param lst - the list of integer elements
+     * @return - the map having the count as mentioned above
+     *
+     */
+    public static Map&lt;Integer, Integer&gt; getMapWithCount(List&lt;Integer&gt; lst) {
+<span class="fc" id="L21">        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L22" title="All 4 branches covered.">        if (lst != null &amp;&amp; !lst.isEmpty()) {</span>
+            //for (int i: lst)
+<span class="fc" id="L24">            lst.stream().forEach(i -&gt; {;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">                map.compute(i, (k, v) -&gt; (v == null ? 1 : ++v));</span>
+<span class="fc" id="L26">            });</span>
+        }
+<span class="fc" id="L28">        return map;</span>
+    }
+
+    /**
+     * Returns boolean if the element passed is a prime
+     * @param elem
+     * @return boolean
+     */
+    public static boolean isPrimeNumber(int elem) {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (elem &lt;= 1)</span>
+<span class="fc" id="L38">            return false;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 2; i &lt;= Math.sqrt(elem); i++) {</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            if ((elem % i) == 0)</span>
+<span class="fc" id="L41">                return false;</span>
+        }
+<span class="fc" id="L43">        return true;</span>
+    }
+
+    /**
+     * Implementation of operation to get elements not present as a list
+     * @param map
+     * @param maxRange
+     * @param minRange
+     * @return List of elements not present
+     */
+    public static List&lt;Integer&gt; getElementsNotPresentInArrays(Map&lt;Integer, Integer&gt; map, int maxRange, int minRange) {
+<span class="fc" id="L54">        return IntStream.range(minRange, maxRange).boxed()</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">                .filter(c -&gt; !map.containsKey(c)).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Utility method that generates a random array containing integers as specified by the startRange and endRange values
+     * @param arrLength - length of array)
+     * @param startRange - min range
+     * @param endRange - max range
+     * @return Array of Ints (with specified length and range)
+     * @throws InvalidArraySpecException - if inputs have issues
+     */
+    public static int[] generateRandomArray(int arrLength, int startRange, int endRange) {
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (arrLength &lt;= 0)</span>
+<span class="fc" id="L69">            throw new InvalidArraySpecException(&quot; Input Array Length Invalid &quot;);</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        else if (endRange &lt;= 0)</span>
+<span class="fc" id="L71">            throw new InvalidArraySpecException(&quot; Input Max Range Invalid &quot;);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        else if (startRange &lt; 0)</span>
+<span class="fc" id="L73">            throw new InvalidArraySpecException(&quot; Input Min Range Invalid &quot;);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        else if (startRange &gt; endRange)</span>
+<span class="fc" id="L75">            throw new InvalidArraySpecException(&quot; Input Min Range is greater than Max Range &quot;);</span>
+
+
+<span class="fc" id="L78">        int[] arr = new int[arrLength];</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (int i = 0; i &lt; arrLength; i++) {</span>
+<span class="fc" id="L81">            arr[i] = new Random().nextInt(startRange, endRange);</span>
+        }
+
+<span class="fc" id="L84">        return arr;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ESourceAssignment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">E-Source</a> &gt; <a href="index.source.html" class="el_package">com.esource.assignment</a> &gt; <span class="el_source">ESourceAssignment.java</span></div><h1>ESourceAssignment.java</h1><pre class="source lang-java linenums">package com.esource.assignment;
+
+import com.esource.assignment.svc.ifc.ArrayExtractSvc;
+import com.esource.assignment.svc.impl.ArrayDataExtractSvcClassImpl;
+
+import java.util.List;
+
+
+
+<span class="fc" id="L10">public class ESourceAssignment {</span>
+
+    //private static Logger logger = LoggerFactory.getLogger(ESourceAssignment.class);
+
+    /**
+     * Utility method to print list contents
+     * @param lst
+     */
+    public static void printArray(List&lt;Integer&gt; lst) {
+<span class="fc" id="L19">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L20">        sb.append(&quot;{ &quot;);</span>
+<span class="fc" id="L21">        Integer[] arr = new Integer[lst.size()];</span>
+<span class="fc" id="L22">        lst.toArray(arr);</span>
+<span class="fc" id="L23">        int len = arr.length;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for(int i = 0; i &lt; len; i++) {</span>
+<span class="fc" id="L25">            sb.append(arr[i]);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (i != len-1)</span>
+<span class="fc" id="L27">                sb.append(&quot; , &quot;);</span>
+        }
+<span class="fc" id="L29">        sb.append(&quot; }&quot;);</span>
+
+<span class="fc" id="L31">        System.out.println(&quot; List of elements not present -&gt; &quot; + sb.toString());</span>
+<span class="fc" id="L32">    }</span>
+
+    public static void main(String[] args) {
+
+        //Generate Random Arrays
+<span class="fc" id="L37">        int[] arr1 = Utilities.generateRandomArray(15, 0, 50);</span>
+<span class="fc" id="L38">        int[] arr2 = Utilities.generateRandomArray(15, 0, 50);</span>
+<span class="fc" id="L39">        int[] arr3 = Utilities.generateRandomArray(15, 0, 50);</span>
+
+        //Instantiate Service
+<span class="fc" id="L42">        ArrayExtractSvc svc = new ArrayDataExtractSvcClassImpl();</span>
+
+        //Get List of numbers not present in arrays
+<span class="fc" id="L45">        List&lt;Integer&gt; lst = svc.getElementsNotPresentInArrays(0,50, arr1, arr2, arr3);</span>
+
+        //Print List
+<span class="fc" id="L48">        printArray(lst);</span>
+
+        //Print Largest Prime
+<span class="fc" id="L51">        System.out.println(&quot; Largest Prime &quot; + svc.getLargestPrime(lst));</span>
+
+<span class="fc" id="L53">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
